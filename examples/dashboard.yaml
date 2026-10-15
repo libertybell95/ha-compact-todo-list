@@ -1,0 +1,19 @@
+# Minimal
+type: custom:ha-compact-todo-card
+entity: todo.ksi
+---
+# Every option, with its default unless noted
+type: custom:ha-compact-todo-card
+entity: todo.ksi
+title: KSI Tasks # default: the entity's name
+row_height: 36
+max_height: 350 # default: 0 (no limit)
+scrollable: true
+expand_on_click: true
+accordion: true
+animate_expansion: true
+show_completed: false
+show_task_count: true
+show_add_button: true
+sort: manual
+theme: auto

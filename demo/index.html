@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Compact To-Do Card – Demo</title>
+    <style>
+      :root {
+        --primary-color: #03a9f4;
+        --text-primary-color: #fff;
+        --primary-text-color: #212121;
+        --secondary-text-color: #727272;
+        --divider-color: rgba(0, 0, 0, 0.12);
+        --card-background-color: #fff;
+        --primary-background-color: #fafafa;
+        --secondary-background-color: #e5e5e5;
+        --error-color: #db4437;
+        --warning-color: #ffa600;
+        --rgb-primary-text-color: 33, 33, 33;
+        --rgb-error-color: 219, 68, 55;
+        --rgb-warning-color: 255, 166, 0;
+        color-scheme: light;
+      }
+      :root[data-theme="dark"] {
+        --primary-text-color: #e1e1e1;
+        --secondary-text-color: #9b9b9b;
+        --divider-color: rgba(225, 225, 225, 0.12);
+        --card-background-color: #1c1c1c;
+        --primary-background-color: #111;
+        --secondary-background-color: #282828;
+        --rgb-primary-text-color: 225, 225, 225;
+        color-scheme: dark;
+      }
+      body {
+        margin: 0;
+        padding: 16px;
+        background: var(--primary-background-color);
+        color: var(--primary-text-color);
+        font-family: Roboto, "Noto Sans", system-ui, sans-serif;
+      }
+      .controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 16px;
+        font-size: 13px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr));
+        gap: 16px;
+        align-items: start;
+      }
+      .narrow {
+        max-width: 280px;
+      }
+      h3 {
+        margin: 0 0 6px;
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--secondary-text-color);
+      }
+    </style>
+  </head>
+  <body>
+    <p style="font-size: 12px; color: var(--secondary-text-color)">
+      Local development harness. Home Assistant is simulated in memory; this is not a live Home
+      Assistant instance.
+    </p>
+    <div class="controls">
+      <button id="theme">Toggle dark mode</button>
+      <button id="external">Simulate change from another dashboard</button>
+      <button id="fail">Fail next service call</button>
+      <button id="disconnect">Toggle connection</button>
+    </div>
+    <div class="grid">
+      <section>
+        <h3>Default (5 tasks)</h3>
+        <div id="c1"></div>
+      </section>
+      <section>
+        <h3>Completed shown · max_height 300 · 25 tasks</h3>
+        <div id="c2"></div>
+      </section>
+      <section class="narrow">
+        <h3>Narrow (280px) · 100 tasks</h3>
+        <div id="c3"></div>
+      </section>
+    </div>
+    <script type="module" src="./demo.ts"></script>
+  </body>
+</html>
