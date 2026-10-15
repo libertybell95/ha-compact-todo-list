@@ -25,11 +25,20 @@ Versions stay in `0.x` until every item in [Live verification](#live-verificatio
 2. Bump the version without creating a tag: `npm version <patch|minor|major> --no-git-tag-version`.
 3. Run `npm run check` locally.
 4. Commit (`chore: release vX.Y.Z`), open a pull request, and wait for **CI** and **HACS validation** to pass. Merge it.
-5. On GitHub, create a release with tag `vX.Y.Z` on `main` and the changelog section as notes. Publish it.
-6. The **Release** workflow runs automatically. It fails if the tag doesn't match `package.json`. It then runs every check, builds the bundle, and attaches `ha-compact-todo-card.js` to the release.
+5. Tag the merged commit and push the tag:
+
+   ```bash
+   git checkout main && git pull
+   git tag vX.Y.Z
+   git push origin vX.Y.Z
+   ```
+
+6. The **Release** workflow runs automatically. It fails if the tag doesn't match `package.json` or if `CHANGELOG.md` has no section for the version. It then runs every check, builds the bundle, and creates the GitHub release with `ha-compact-todo-card.js` already attached and the changelog section as notes.
 7. Confirm the release lists the `.js` asset. Then, in a Home Assistant instance, choose **HACS → Compact To-Do Card → Update information** and check that the new version is offered.
 
-To publish a release candidate, tick **Set as a pre-release** in step 5. Only HACS users who have turned on beta versions for this card will get it.
+Don't create releases by hand in the GitHub UI or with `gh release create`. A release published before its `.js` file is attached is reported by HACS as "Repository structure for vX.Y.Z is not compliant", and HACS may cache that result until someone chooses **Update information**.
+
+To publish a release candidate, use a tag like `vX.Y.Z-rc.1`; the workflow marks it as a pre-release. Only HACS users who have turned on beta versions for this card will get it. The version in `package.json` must match, e.g. `X.Y.Z-rc.1`.
 
 ## Rollback
 

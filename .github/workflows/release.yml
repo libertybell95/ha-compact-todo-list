@@ -1,16 +1,18 @@
 name: Release
 
-# Runs when a maintainer publishes a GitHub release (tag vX.Y.Z).
-# Builds the card and attaches ha-compact-todo-card.js, which HACS downloads.
+# Triggered by pushing a tag vX.Y.Z (or vX.Y.Z-rc.N for a pre-release).
+# Runs every check, builds the card, then creates the GitHub release with
+# ha-compact-todo-card.js already attached. Creating the release and its asset
+# in one step means HACS never sees a release without the file.
 on:
-  release:
-    types: [published]
+  push:
+    tags: ["v*.*.*"]
 
 permissions:
   contents: write
 
 jobs:
-  build-and-attach:
+  release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -21,17 +23,30 @@ jobs:
       - run: npm ci
       - name: Verify tag matches package.json version
         env:
-          TAG: ${{ github.event.release.tag_name }}
+          TAG: ${{ github.ref_name }}
         run: |
           VERSION="v$(node -p "require('./package.json').version")"
           if [ "$TAG" != "$VERSION" ]; then
-            echo "::error::Release tag $TAG does not match package.json version $VERSION"
+            echo "::error::Tag $TAG does not match package.json version $VERSION"
             exit 1
           fi
       - name: Full check (types, lint, format, tests, build)
         run: npm run check
-      - name: Attach bundle to release
+      - name: Extract release notes from CHANGELOG.md
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          awk -v v="${TAG#v}" '$0 ~ "^## \\[" v "\\]" {f=1; next} /^## \[/ {f=0} f' CHANGELOG.md > notes.md
+          if [ ! -s notes.md ]; then
+            echo "::error::CHANGELOG.md has no section for ${TAG#v}"
+            exit 1
+          fi
+      - name: Create release with bundle attached
         env:
           GH_TOKEN: ${{ github.token }}
-          TAG: ${{ github.event.release.tag_name }}
-        run: gh release upload "$TAG" dist/ha-compact-todo-card.js --clobber
+          TAG: ${{ github.ref_name }}
+        run: |
+          PRERELEASE=""
+          case "$TAG" in *-*) PRERELEASE="--prerelease" ;; esac
+          gh release create "$TAG" dist/ha-compact-todo-card.js \
+            --verify-tag --title "$TAG" --notes-file notes.md $PRERELEASE
