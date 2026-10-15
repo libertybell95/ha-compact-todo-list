@@ -1,22 +1,20 @@
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/libertybell95/ha-compact-todo-list/main/docs/images/icon-dark.png">
+  <img src="https://raw.githubusercontent.com/libertybell95/ha-compact-todo-list/main/docs/images/icon-light.png" alt="" width="96" height="96" align="right">
+</picture>
+
 # Compact To-Do Card
 
 A compact to-do list card for Home Assistant dashboards. Each task is one short row; tap a task to see its description, due date and an **Edit** button.
 
 Home Assistant's built-in to-do card shows every task's description under its title, so a list of five tasks can fill the screen. This card shows only titles until you open a task, and it still lets you add, complete, edit and delete tasks on any to-do list in Home Assistant.
 
-```text
-┌──────────────────────────────────────────────┐
-│  KSI Tasks                         5    [+]  │
-├──────────────────────────────────────────────┤
-│  □  Dry Solids Radar Testing             ⌄   │
-│     Arrived. Most likely install at end      │
-│     of October.                              │
-│                                     Edit     │
-│  □  AB Hardware                 Oct 20   ›   │
-│  □  AB Sensor Form                       ›   │
-│  □  APG Radar Sensor                     ›   │
-└──────────────────────────────────────────────┘
-```
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/libertybell95/ha-compact-todo-list/main/docs/images/hero-dark.png">
+  <img src="https://raw.githubusercontent.com/libertybell95/ha-compact-todo-list/main/docs/images/hero-light.png" alt="Illustration: a to-do list with descriptions under every task becomes a compact list where only the opened task shows its details." width="800">
+</picture>
+
+<sub>Illustration only. Real screenshots are listed under [Screenshots](#screenshots).</sub>
 
 - **Short rows:** 36 px per task by default. Long titles are cut off with "…".
 - **Expand a task:** shows its full title, description (line breaks kept), due date, and Edit.

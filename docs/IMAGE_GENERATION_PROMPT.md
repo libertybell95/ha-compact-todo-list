@@ -41,9 +41,27 @@ README screenshots must come from a real Home Assistant dashboard, not image gen
 > 3. _(Optional)_ **Social preview:** 1280 × 640 PNG with an opaque background in `#F5F5F5`. The icon drawing sits on the left third. The right two-thirds shows a larger version of the card, with the top row open and four rows closed, so the size difference is easy to see. The only text allowed is "Compact To-Do Card" in a plain sans-serif (Roboto or similar), dark gray `#212121`.
 > 4. _(Optional)_ **Hero illustration:** 1600 × 600 PNG in light and dark versions. Two cards side by side: on the left, a tall "before" card where every row has big gray description blocks; on the right, the short "after" card with thin rows and one open. A small arrow points from left to right. No text.
 
-## After generating
+## Delivered assets
 
-- Save the files in `docs/images/` as `icon.png`, `icon-dark.png`, `social-preview.png`, `hero-light.png` and `hero-dark.png`.
-- Check that the icon is legible at 48 px and that the transparent backgrounds have no leftover halo.
-- Optimize each file (for example `oxipng -o 4` or TinyPNG) and keep each under 300 KB.
+The generated set (v0.1.1) lives in `docs/images/`:
+
+| File                 | Size       | Notes                                                         |
+| -------------------- | ---------- | ------------------------------------------------------------- |
+| `icon-light.png`     | 512 × 512  | Transparent background. README header in light mode           |
+| `icon-dark.png`      | 512 × 512  | Transparent background. README header in dark mode            |
+| `hero-light.png`     | 1200 × 450 | Downscaled from 1600 × 600. README illustration in light mode |
+| `hero-dark.png`      | 1200 × 450 | Downscaled from 1600 × 600. README illustration in dark mode  |
+| `social-preview.png` | 1280 × 640 | Upload under GitHub → Settings → General → Social preview     |
+
+Processing applied to the originals:
+
+- Icons: alpha values ≤ 2 set to fully transparent (this removed faint specks in the dark icon) and ≥ 250 set to fully opaque. Recompressed losslessly.
+- Heroes: Lanczos downscale. Recompressed losslessly.
+- Palette (lossy) compression was tested and rejected. It desaturated the accent blue and erased the checkmarks.
+
+## Replacing an asset
+
+- Keep the file names and sizes above so the README links keep working.
+- Check that icons are legible at 48 px and that transparent backgrounds have no halo.
+- Use lossless optimization only (for example `oxipng -o 4`).
 - Don't add these images to the card's JavaScript bundle.

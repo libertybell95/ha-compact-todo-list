@@ -6,6 +6,19 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-10-15
+
+### Added
+
+- Project artwork in `docs/images/`: icon, README illustration (light and
+  dark variants) and a GitHub social preview image.
+
+### Changed
+
+- README shows the icon and illustration, switching with the reader's
+  light or dark mode.
+- HACS validation no longer skips the README image check.
+
 ## [0.1.0] - 2026-10-15
 
 ### Added
