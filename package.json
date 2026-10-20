@@ -1,6 +1,6 @@
 {
   "name": "ha-compact-todo-card",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A compact, accessible to-do list card for Home Assistant dashboards.",
   "type": "module",
   "private": true,

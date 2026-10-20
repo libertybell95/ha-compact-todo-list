@@ -6,6 +6,8 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+## [0.1.2] - 2026-10-20
+
 ### Changed
 
 - Long task titles now wrap onto more lines at word boundaries instead of
