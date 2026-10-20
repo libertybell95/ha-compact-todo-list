@@ -1,8 +1,9 @@
 name: CI
 
+# Runs on pull requests only. The "Protect main" ruleset requires this check
+# to pass on an up-to-date branch before merging, so a run after the merge
+# would test the same code again.
 on:
-  push:
-    branches: [main]
   pull_request:
 
 permissions:
