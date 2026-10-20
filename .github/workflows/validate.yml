@@ -1,9 +1,12 @@
 name: HACS validation
 
+# HACS validation also checks repository settings (description, topics) and
+# HACS updates its rules, neither of which triggers a push, so it runs weekly
+# instead of on every merge to main.
 on:
-  push:
-    branches: [main]
   pull_request:
+  schedule:
+    - cron: "0 6 * * 1"
   workflow_dispatch:
 
 permissions:
