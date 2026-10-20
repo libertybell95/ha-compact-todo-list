@@ -326,30 +326,20 @@ export class CompactTodoRow extends LitElement {
       .line:hover {
         background: var(--ctc-hover);
       }
+      /* Titles wrap, so the checkbox, due date and chevron align to the first line. */
       .check {
         display: flex;
         flex: none;
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
         width: 44px;
-        cursor: pointer;
-      }
-      .is-expanded .check {
-        align-items: flex-start;
         padding-top: calc((var(--ctc-row-height, 36px) - 18px) / 2);
-      }
-      .is-expanded .toggle {
-        align-items: flex-start;
-      }
-      .is-expanded .toggle > .chevron,
-      .is-expanded .toggle > .due,
-      .is-expanded .toggle > .status {
-        margin-top: calc((var(--ctc-row-height, 36px) - 20px) / 2);
+        cursor: pointer;
       }
       .toggle {
         display: flex;
         flex: 1;
-        align-items: center;
+        align-items: flex-start;
         gap: 8px;
         min-width: 0;
         min-height: var(--ctc-row-height, 36px);
@@ -362,6 +352,11 @@ export class CompactTodoRow extends LitElement {
         text-align: start;
         cursor: pointer;
       }
+      .toggle > .chevron,
+      .toggle > .due,
+      .toggle > .status {
+        margin-top: calc((var(--ctc-row-height, 36px) - 20px) / 2);
+      }
       .toggle.static {
         cursor: default;
       }
@@ -369,17 +364,15 @@ export class CompactTodoRow extends LitElement {
       .toggle-alt:focus-visible {
         outline-offset: -2px;
       }
+      /* Wrap at word boundaries; only a single word wider than the row is broken. */
       .summary {
         flex: 1;
         min-width: 0;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+        padding: calc((var(--ctc-row-height, 36px) - 20px) / 2) 0;
+        overflow-wrap: break-word;
+        hyphens: none;
       }
       .is-expanded .summary {
-        padding: calc((var(--ctc-row-height, 36px) - 20px) / 2) 0;
-        white-space: normal;
-        overflow-wrap: anywhere;
         font-weight: 500;
       }
       .completed .summary {
@@ -412,9 +405,10 @@ export class CompactTodoRow extends LitElement {
         transform: rotate(90deg);
       }
       .chevron-button {
-        align-self: center;
+        align-self: flex-start;
         width: 32px;
         height: 32px;
+        margin-top: calc((var(--ctc-row-height, 36px) - 32px) / 2);
       }
       .details-wrap {
         display: grid;

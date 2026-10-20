@@ -6,6 +6,13 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+### Changed
+
+- Long task titles now wrap onto more lines at word boundaries instead of
+  being cut off with an ellipsis. Words are not hyphenated or split, unless
+  one word is wider than the whole row. The checkbox, due date and chevron
+  line up with the first line of the title.
+
 ## [0.1.1] - 2026-10-15
 
 ### Added
