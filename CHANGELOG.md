@@ -6,6 +6,13 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+## [0.1.3] - 2026-11-02
+
+### Security
+
+- Update the `happy-dom` development dependency from 21.0.1 to 21.0.4 for
+  upstream security fixes in the test environment.
+
 ## [0.1.2] - 2026-10-20
 
 ### Changed
